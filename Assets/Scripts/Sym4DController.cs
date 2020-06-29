@@ -54,12 +54,16 @@ public class Sym4DController : MonoBehaviour
         int _roll = int.Parse(roll.text);
         int _pitch = int.Parse(pitch.text);
 
-        //의자 동작 준비
-        Sym4DEmulator.Sym4D_X_StartContents(xPort);
+        //의자 동작 중지
+        Sym4DEmulator.Sym4D_X_EndContents();
         yield return ws;
 
-        //의자 동작
+        //의자 동작 데이터 전송
         Sym4DEmulator.Sym4D_X_SendMosionData(_roll, _pitch);
+        yield return ws;
+
+        //의자 동작 준비
+        Sym4DEmulator.Sym4D_X_StartContents(xPort);
         yield return ws;
     }
 
